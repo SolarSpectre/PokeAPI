@@ -6,6 +6,9 @@ import { NgFor, NgIf, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FirebaseService, PokemonComment } from '../services/firebase.service';
 
+import { addIcons } from 'ionicons';
+import { trashOutline } from 'ionicons/icons';
+
 @Component({
   selector: 'app-detalles',
   standalone: true,
@@ -25,7 +28,9 @@ export class DetallesPage implements OnInit {
     private http: HttpClient,
     private firebaseService: FirebaseService,
     private toastController: ToastController
-  ) {}
+  ) {
+    addIcons({ trashOutline });
+  }
 
   ngOnInit() {
     const name = this.route.snapshot.paramMap.get('name');

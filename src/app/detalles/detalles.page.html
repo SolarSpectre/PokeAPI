@@ -18,34 +18,46 @@
   <div *ngIf="pokemon">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{ pokemon.name}} (ID: {{ pokemon.id }})</ion-card-title>
+        <ion-card-title>{{ pokemon.name}} N.°000{{ pokemon.id}}</ion-card-title>
       </ion-card-header>
 
-      <ion-card-content class="ion-text-center">
-        <img [src]="pokemon.image" [alt]="pokemon.name" style="width: 150px; height: 150px;" />
+      <ion-card-content>
+        <div class="details-main-layout">
+          <div class="left-column">
+            <div class="pokemon-image">
+              <img [src]="pokemon.image" [alt]="pokemon.name" />
+            </div>
 
-        <p><strong>Altura:</strong> {{ pokemon.height }}</p>
-        <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
+            <div *ngIf="pokemon.stats?.length > 0" class="base-stats-section">
+              <h3>Estadísticas</h3>
+              <ion-list>
+                <ion-item *ngFor="let stat of pokemon.stats">
+                  <ion-label>{{ stat.name}}</ion-label>
+                  <ion-progress-bar [value]="stat.value / 150"></ion-progress-bar>
+                  <ion-note slot="end">{{ stat.value }}</ion-note>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
 
-        <p><strong>Tipos:</strong></p>
-        <ion-chip *ngFor="let type of pokemon.types" color="primary" class="ion-margin-end">
-          {{ type}}
-        </ion-chip>
+          <div class="right-column">
+            <p><strong>Height:</strong> {{ pokemon.height }}</p>
+            <p><strong>Weight:</strong> {{ pokemon.weight }}</p>
 
-        <p><strong>Habilidades:</strong></p>
-        <ion-badge *ngFor="let ability of pokemon.abilities" color="tertiary" class="ion-margin-end">
-          {{ ability }}
-        </ion-badge>
+            <p><strong>Types:</strong></p>
+            <div class="types-container">
+              <ion-chip *ngFor="let type of pokemon.types">
+                {{ type}}
+              </ion-chip>
+            </div>
 
-        <div *ngIf="pokemon.stats?.length > 0" class="ion-margin-top">
-          <h3>Estadísticas</h3>
-          <ion-list>
-            <ion-item *ngFor="let stat of pokemon.stats">
-              <ion-label>{{ stat.name}}</ion-label>
-              <ion-progress-bar [value]="stat.value / 150" color="success" class="ion-margin-horizontal"></ion-progress-bar>
-              <ion-note slot="end">{{ stat.value }}</ion-note>
-            </ion-item>
-          </ion-list>
+            <p><strong>Abilities:</strong></p>
+            <div class="abilities-container">
+              <ion-badge *ngFor="let ability of pokemon.abilities">
+                {{ ability }}
+              </ion-badge>
+            </div>
+          </div>
         </div>
       </ion-card-content>
     </ion-card>

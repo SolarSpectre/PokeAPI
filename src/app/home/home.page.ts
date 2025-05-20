@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { FirebaseService, SavedPokemon } from '../services/firebase.service';
 import { FormsModule } from '@angular/forms';
 
+import { addIcons } from 'ionicons';
+import { trashOutline } from 'ionicons/icons';
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -28,7 +31,9 @@ export class HomePage implements OnInit {
     private http: HttpClient,
     private firebaseService: FirebaseService,
     private toastController: ToastController
-  ) {}
+  ) {
+    addIcons({ trashOutline });
+  }
 
   ngOnInit(): void {
     this.loadPokemons();
@@ -58,8 +63,21 @@ export class HomePage implements OnInit {
     this.loading = true;
     
     this.http.get<any>(`https://pokeapi.co/api/v2/pokemon?limit=${this.limit}&offset=${this.offset}`).subscribe({
-      next: (response) => {
-        this.pokemons = [...this.pokemons, ...response.results];
+      next: async (response) => {
+        // Fetch details for each Pokemon to get their IDs
+        const pokemonDetails = await Promise.all(
+          response.results.map((pokemon: any) => 
+            this.http.get<any>(pokemon.url).toPromise()
+          )
+        );
+        
+        const pokemonsWithDetails = pokemonDetails.map((details: any) => ({
+          name: details.name,
+          id: details.id,
+          url: details.url
+        }));
+
+        this.pokemons = [...this.pokemons, ...pokemonsWithDetails];
         this.filteredPokemons = [...this.pokemons];
         this.offset += this.limit;
         this.loading = false;
@@ -127,8 +145,8 @@ export class HomePage implements OnInit {
     }
   }
 
-  getImageUrl(index: number): string {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`;
+  getImageUrl(pokemon: any): string {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
   }
 
   getSavedPokemonImage(savedPokemon: SavedPokemon): string {
