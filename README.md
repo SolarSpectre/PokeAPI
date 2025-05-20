@@ -42,7 +42,12 @@ ionic serve
 ```
 
 ## 📸 Capturas de Pantalla
-background 
+
+![Sin título-1](https://github.com/user-attachments/assets/bfb9e4b1-0ca5-45a0-8f2a-6ef95d474c4f)
+![Sin título](https://github.com/user-attachments/assets/c56aac44-6ece-4a33-9eb1-7239710c91c1)
+![Sin título-1](https://github.com/user-attachments/assets/75ccd9b6-1bc1-4e1d-b90c-3eb69e83aced)
+![Sin título](https://github.com/user-attachments/assets/063090ec-cb0a-42aa-bf76-b2f747771e6c)
+
 
 ## 🔧 Configuración de Firebase
 
