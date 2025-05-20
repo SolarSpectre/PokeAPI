@@ -1,0 +1,48 @@
+ion-content {
+  --background: linear-gradient(to bottom, #f2f2f2, #e8e8e8);
+}
+
+ion-card {
+  border-radius: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  text-align: center;
+  padding: 10px;
+}
+
+ion-card:hover {
+  transform: scale(1.03);
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin: 10px auto;
+  display: block;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 4px solid #ffcb05; // Estilo Pokémon
+}
+
+ion-card-title {
+  font-size: 1.1rem;
+  color: #2a75bb;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+ion-button {
+  --background: #3b4cca;
+  --background-hover: #2a50a3;
+  --color: #fff;
+  font-weight: bold;
+  margin-top: 8px;
+  border-radius: 12px;
+}
+
+ion-infinite-scroll-content {
+  --color: #2a75bb;
+  font-weight: 500;
+  margin-top: 20px;
+}
